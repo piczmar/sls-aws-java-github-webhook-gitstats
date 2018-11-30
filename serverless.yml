@@ -1,0 +1,34 @@
+service: aws-java-github-webhook-gitstats
+
+provider:
+  name: aws
+  runtime: java8
+  stage: ${opt:stage, 'dev'}
+  profile: sls
+  region: us-east-1
+  environment:
+    GITHUB_WEBHOOK_SECRET: 9d3114c09735840dbeb3881610572e3f661c1c81
+    PERSONAL_ACCESS_TOKEN: aeb3684c511961ef605b9aebd0cf7bfc82b3a1cb
+    ENTRY_FUNCTION_NAME: ${self:service}-${self:provider.stage}-job
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+    - lambda:InvokeFunction
+    Resource: "*"
+
+package:
+  artifact: build/distributions/aws-java-github-webhook-gitstats.zip
+
+functions:
+  webhook:
+    handler: com.serverless.ApiGatewayHandler
+    timeout: 30 # max API Gateway timeout
+    events:
+    - http:
+        path: webhook
+        method: post
+        cors: true
+  job:
+    handler: com.serverless.Job
+    timeout: 900 # 15 min.
+
