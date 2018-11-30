@@ -63,6 +63,10 @@ admin to install a Github App.
 
 The drawback is that there is no indicator that the analysis is running on PR page in Github, in contrary when using
  the Checks API mentioned below.
+ 
+An example review comment looks as below: 
+
+![Example review comment](example_review.png)
 
 2. [Checks API](https://developer.github.com/v3/checks/runs/#create-a-check-run)
 
