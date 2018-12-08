@@ -20,7 +20,9 @@ dependencies {
 
             // utils and aws client sdk
             'com.amazonaws:aws-java-sdk-lambda:1.11.461',
-            'com.amazonaws:aws-java-sdk-core:1.11.461'
+            'com.amazonaws:aws-java-sdk-core:1.11.461',
+            'com.amazonaws:aws-java-sdk-dynamodb:1.11.461'
+
     )
     testCompile(
             'org.junit.jupiter:junit-jupiter-api:5.3.2',
@@ -38,7 +40,7 @@ task buildZip(type: Zip) {
     // Link: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Zip.html
 
     // set the base name of the zip file
-    baseName = "aws-java-github-webhook-gitstats"
+    baseName = "aws-java-github-webhook-nolayers"
     from compileJava
     from processResources
     into('lib') {
@@ -46,8 +48,21 @@ task buildZip(type: Zip) {
     }
 }
 
+//task buildLayer(type: Copy) {
+//    into "$buildDir/layer/java/lib"
+//    from configurations.runtime
+//}
+
+//task buildLayer(type: Zip) {
+//    baseName = "layer"
+//    into('java/lib') {
+//        from configurations.runtime
+//    }
+//}
+
 build.dependsOn buildZip
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.5'
 }
+
