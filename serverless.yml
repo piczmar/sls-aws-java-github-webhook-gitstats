@@ -1,4 +1,4 @@
-service: aws-java-github-webhook-nolayers
+service: aws-java-github-webhook-nolhot
 
 provider:
   name: aws
