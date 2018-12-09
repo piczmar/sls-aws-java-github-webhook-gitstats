@@ -42,6 +42,7 @@ public class Job implements RequestHandler<Map<String, Object>, String> {
         validate(notEmpty(id), "No X-Github-Delivery found on request");
 
         try {
+
             String calculatedSig = "sha1=" + calculateRFC2104HMAC(body, WEB_HOOK_TOKEN);
             LOG.info("calculatedSig=" + calculatedSig);
 
