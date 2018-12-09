@@ -1,4 +1,4 @@
-service: aws-java-github-webhook-gitstats
+service: aws-java-github-webhook-lhot
 
 provider:
   name: aws
