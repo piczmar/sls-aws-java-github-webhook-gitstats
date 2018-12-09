@@ -1,4 +1,4 @@
-service: aws-java-github-webhook-lhot
+service: aws-java-github-webhook-lcold
 
 provider:
   name: aws
@@ -35,7 +35,7 @@ functions:
   cron:
     handler: stats.ColdStartStats
     events:
-    - schedule: rate(2 minutes)
+    - schedule: rate(1 hour)
     layers:
     - {Ref: DependenciesLambdaLayer}
 
