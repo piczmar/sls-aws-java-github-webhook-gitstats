@@ -7,9 +7,6 @@ provider:
   profile: sls
   region: us-east-1
   environment:
-    GITHUB_WEBHOOK_SECRET: 9d3114c09735840dbeb3881610572e3f661c1c81
-    PERSONAL_ACCESS_TOKEN: aeb3684c511961ef605b9aebd0cf7bfc82b3a1cb
-    ENTRY_FUNCTION_NAME: ${self:service}-${self:provider.stage}-job
     DYNAMODB_TABLE: ${self:service}-${self:provider.stage}-stats
     STATS_FUNCTION_NAME: ${self:service}-${self:provider.stage}-webhook
   iamRoleStatements:
@@ -33,9 +30,9 @@ package:
 
 functions:
   cron:
-    handler: stats.ColdStartStats
+    handler: stats.StartStats
     events:
-    - schedule: rate(1 hour)
+    - schedule: rate(2 hours)
 #    layers:
 #    - {Ref: DependenciesLambdaLayer}
 
